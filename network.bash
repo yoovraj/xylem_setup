@@ -82,3 +82,19 @@ iptables-restore < /etc/iptables/rules.v4
 update-rc.d hostapd enable update-rc.d isc-dhcp-server enable
 
 iptables -I POSTROUTING -t nat -o $HS_WANIF -j MASQUERADE
+
+
+
+
+
+
+
+### before connecting search on bridge100
+bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=3<RXCSUM,TXCSUM>
+	ether 82:e6:50:21:a9:64
+	inet 192.168.2.1 netmask 0xffffff00 broadcast 192.168.2.255
+	inet6 fe80::80e6:50ff:fe21:a964%bridge100 prefixlen 64 scopeid 0xf
+	Configuration:
+		id 0:0:0:0:0:0 priority 0 hellotime 0 fwddelay 0
+		maxage 0 holdcnt 0 proto stp maxaddr 100 timeout 1200

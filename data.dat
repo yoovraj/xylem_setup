@@ -1,0 +1,33 @@
+mysql> select * from radacct where radacctid = 6\G;
+*************************** 1. row ***************************
+         radacctid: 6
+     acctsessionid: 152064812100000002
+      acctuniqueid: 5de9ab71f726736ef69daa0947d9b182
+          username: yoovraj
+         groupname:
+             realm:
+      nasipaddress: 192.168.10.1
+         nasportid: 00000002
+       nasporttype: Wireless-802.11
+     acctstarttime: 2018-03-10 11:20:57
+    acctupdatetime: 2018-03-10 11:25:59
+      acctstoptime: NULL
+      acctinterval: 302
+   acctsessiontime: 302
+     acctauthentic:
+ connectinfo_start:
+  connectinfo_stop:
+   acctinputoctets: 6518038
+  acctoutputoctets: 433233
+   calledstationid: B8-27-EB-41-67-CB
+  callingstationid: 58-7F-57-B8-C2-3B
+acctterminatecause:
+       servicetype:
+    framedprotocol:
+   framedipaddress: 192.168.10.2
+1 row in set (0.00 sec)
+
+
+select * from radpostauth;
+| id | username   | pass                                 | reply         | authdate            |
+| 23 | yoovraj    | 0x00d9c5f64ac4b5ac210649b1a856145a15 | Access-Accept | 2018-03-10 11:20:57 |

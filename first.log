@@ -1,0 +1,329 @@
+(1) Received Access-Request Id 28 from 192.168.2.9:43172 to 192.168.2.1:1812 length 308
+(1)   ChilliSpot-Version = "1.4"
+(1)   User-Name = "yoovraj"
+(1)   CHAP-Challenge = 0x8630e22d76dae061b887fff8a75573da
+(1)   CHAP-Password = 0x00d9c5f64ac4b5ac210649b1a856145a15
+(1)   Service-Type = Login-User
+(1)   Acct-Session-Id = "152064812100000002"
+(1)   Framed-IP-Address = 192.168.10.2
+(1)   NAS-Port-Type = Wireless-802.11
+(1)   NAS-Port = 2
+(1)   NAS-Port-Id = "00000002"
+(1)   Calling-Station-Id = "58-7F-57-B8-C2-3B"
+(1)   Called-Station-Id = "B8-27-EB-41-67-CB"
+(1)   NAS-IP-Address = 192.168.10.1
+(1)   NAS-Identifier = "nas01"
+(1)   WISPr-Location-ID = "isocc=,cc=,ac=,network=Coova,PiHomeServerAp"
+(1)   WISPr-Location-Name = "My_HotSpot"
+(1)   WISPr-Logoff-URL = "http://192.168.10.1:3990/logoff"
+(1)   Message-Authenticator = 0x49959ecd24ff1fd7f8c4b9edfa71d224
+(1) # Executing section authorize from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(1)   authorize {
+(1)     policy filter_username {
+(1)       if (&User-Name) {
+(1)       if (&User-Name)  -> TRUE
+(1)       if (&User-Name)  {
+(1)         if (&User-Name =~ / /) {
+(1)         if (&User-Name =~ / /)  -> FALSE
+(1)         if (&User-Name =~ /@[^@]*@/ ) {
+(1)         if (&User-Name =~ /@[^@]*@/ )  -> FALSE
+(1)         if (&User-Name =~ /\.\./ ) {
+(1)         if (&User-Name =~ /\.\./ )  -> FALSE
+(1)         if ((&User-Name =~ /@/) && (&User-Name !~ /@(.+)\.(.+)$/))  {
+(1)         if ((&User-Name =~ /@/) && (&User-Name !~ /@(.+)\.(.+)$/))   -> FALSE
+(1)         if (&User-Name =~ /\.$/)  {
+(1)         if (&User-Name =~ /\.$/)   -> FALSE
+(1)         if (&User-Name =~ /@\./)  {
+(1)         if (&User-Name =~ /@\./)   -> FALSE
+(1)       } # if (&User-Name)  = notfound
+(1)     } # policy filter_username = notfound
+(1)     [preprocess] = ok
+(1) chap:   &control:Auth-Type := CHAP
+(1)     [chap] = ok
+(1)     [mschap] = noop
+(1)     [digest] = noop
+(1) suffix: Checking for suffix after "@"
+(1) suffix: No '@' in User-Name = "yoovraj", looking up realm NULL
+(1) suffix: No such realm "NULL"
+(1)     [suffix] = noop
+(1) eap: No EAP-Message, not doing EAP
+(1)     [eap] = noop
+(1)     [files] = noop
+(1) sql: EXPAND %{User-Name}
+(1) sql:    --> yoovraj
+(1) sql: SQL-User-Name set to 'yoovraj'
+rlm_sql (sql): Closing connection (2): Hit idle_timeout, was idle for 465 seconds
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (3): Hit idle_timeout, was idle for 465 seconds
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (4): Hit idle_timeout, was idle for 465 seconds
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (0): Hit idle_timeout, was idle for 465 seconds
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (5): Hit idle_timeout, was idle for 465 seconds
+rlm_sql (sql): You probably need to lower "min"
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (1): Hit idle_timeout, was idle for 448 seconds
+rlm_sql (sql): You probably need to lower "min"
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (6): Hit idle_timeout, was idle for 448 seconds
+rlm_sql (sql): You probably need to lower "min"
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): 0 of 0 connections in use.  You  may need to increase "spare"
+rlm_sql (sql): Opening additional connection (7), 1 of 32 pending slots used
+rlm_sql_mysql: Starting connect to MySQL server
+rlm_sql_mysql: Connected to database 'radius' on Localhost via UNIX socket, server version 5.7.19, protocol version 10
+rlm_sql (sql): Reserved connection (7)
+(1) sql: EXPAND SELECT id, username, attribute, value, op FROM radcheck WHERE username = '%{SQL-User-Name}' ORDER BY id
+(1) sql:    --> SELECT id, username, attribute, value, op FROM radcheck WHERE username = 'yoovraj' ORDER BY id
+(1) sql: Executing select query: SELECT id, username, attribute, value, op FROM radcheck WHERE username = 'yoovraj' ORDER BY id
+(1) sql: User found in radcheck table
+(1) sql: Conditional check items matched, merging assignment check items
+(1) sql:   Cleartext-Password := "shinde"
+(1) sql: EXPAND SELECT id, username, attribute, value, op FROM radreply WHERE username = '%{SQL-User-Name}' ORDER BY id
+(1) sql:    --> SELECT id, username, attribute, value, op FROM radreply WHERE username = 'yoovraj' ORDER BY id
+(1) sql: Executing select query: SELECT id, username, attribute, value, op FROM radreply WHERE username = 'yoovraj' ORDER BY id
+(1) sql: EXPAND SELECT groupname FROM radusergroup WHERE username = '%{SQL-User-Name}' ORDER BY priority
+(1) sql:    --> SELECT groupname FROM radusergroup WHERE username = 'yoovraj' ORDER BY priority
+(1) sql: Executing select query: SELECT groupname FROM radusergroup WHERE username = 'yoovraj' ORDER BY priority
+(1) sql: User found in the group table
+(1) sql: EXPAND SELECT id, groupname, attribute, Value, op FROM radgroupcheck WHERE groupname = '%{SQL-Group}' ORDER BY id
+(1) sql:    --> SELECT id, groupname, attribute, Value, op FROM radgroupcheck WHERE groupname = 'group1' ORDER BY id
+(1) sql: Executing select query: SELECT id, groupname, attribute, Value, op FROM radgroupcheck WHERE groupname = 'group1' ORDER BY id
+(1) sql: Group "group1": Conditional check items matched
+(1) sql: Group "group1": Merging assignment check items
+(1) sql: EXPAND SELECT id, groupname, attribute, value, op FROM radgroupreply WHERE groupname = '%{SQL-Group}' ORDER BY id
+(1) sql:    --> SELECT id, groupname, attribute, value, op FROM radgroupreply WHERE groupname = 'group1' ORDER BY id
+(1) sql: Executing select query: SELECT id, groupname, attribute, value, op FROM radgroupreply WHERE groupname = 'group1' ORDER BY id
+(1) sql: Group "group1": Merging reply items
+rlm_sql (sql): Released connection (7)
+Need 2 more connections to reach min connections (3)
+rlm_sql (sql): Opening additional connection (8), 1 of 31 pending slots used
+rlm_sql_mysql: Starting connect to MySQL server
+rlm_sql_mysql: Connected to database 'radius' on Localhost via UNIX socket, server version 5.7.19, protocol version 10
+(1)     [sql] = ok
+(1)     [expiration] = noop
+(1)     [logintime] = noop
+(1) pap: WARNING: Auth-Type already set.  Not setting to PAP
+(1)     [pap] = noop
+(1)   } # authorize = ok
+(1) Found Auth-Type = CHAP
+(1) # Executing group from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(1)   Auth-Type CHAP {
+(1) chap: Comparing with "known good" Cleartext-Password
+(1) chap: CHAP user "yoovraj" authenticated successfully
+(1)     [chap] = ok
+(1)   } # Auth-Type CHAP = ok
+(1) # Executing section post-auth from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(1)   post-auth {
+(1)     update {
+(1)       No attributes updated
+(1)     } # update = noop
+(1) sql: EXPAND .query
+(1) sql:    --> .query
+(1) sql: Using query template 'query'
+rlm_sql (sql): Reserved connection (7)
+(1) sql: EXPAND %{User-Name}
+(1) sql:    --> yoovraj
+(1) sql: SQL-User-Name set to 'yoovraj'
+(1) sql: EXPAND INSERT INTO radpostauth (username, pass, reply, authdate) VALUES ( '%{SQL-User-Name}', '%{%{User-Password}:-%{Chap-Password}}', '%{reply:Packet-Type}', '%S')
+(1) sql:    --> INSERT INTO radpostauth (username, pass, reply, authdate) VALUES ( 'yoovraj', '0x00d9c5f64ac4b5ac210649b1a856145a15', 'Access-Accept', '2018-03-10 11:20:57')
+(1) sql: Executing query: INSERT INTO radpostauth (username, pass, reply, authdate) VALUES ( 'yoovraj', '0x00d9c5f64ac4b5ac210649b1a856145a15', 'Access-Accept', '2018-03-10 11:20:57')
+(1) sql: SQL query returned: success
+(1) sql: 1 record(s) updated
+rlm_sql (sql): Released connection (7)
+(1)     [sql] = ok
+(1)     [exec] = noop
+(1)     policy remove_reply_message_if_eap {
+(1)       if (&reply:EAP-Message && &reply:Reply-Message) {
+(1)       if (&reply:EAP-Message && &reply:Reply-Message)  -> FALSE
+(1)       else {
+(1)         [noop] = noop
+(1)       } # else = noop
+(1)     } # policy remove_reply_message_if_eap = noop
+(1)   } # post-auth = ok
+(1) Sent Access-Accept Id 28 from 192.168.2.1:1812 to 192.168.2.9:43172 length 0
+(1) Finished request
+Waking up in 4.9 seconds.
+(2) Received Accounting-Request Id 1 from 192.168.2.9:37234 to 192.168.2.1:1813 length 232
+(2)   ChilliSpot-Version = "1.4"
+(2)   Attr-26.14559.10 = 0x00000002
+(2)   Event-Timestamp = "Mar 10 2018 11:20:57 JST"
+(2)   User-Name = "yoovraj"
+(2)   Acct-Status-Type = Start
+(2)   Acct-Session-Id = "152064812100000002"
+(2)   Framed-IP-Address = 192.168.10.2
+(2)   NAS-Port-Type = Wireless-802.11
+(2)   NAS-Port = 2
+(2)   NAS-Port-Id = "00000002"
+(2)   Calling-Station-Id = "58-7F-57-B8-C2-3B"
+(2)   Called-Station-Id = "B8-27-EB-41-67-CB"
+(2)   NAS-IP-Address = 192.168.10.1
+(2)   NAS-Identifier = "nas01"
+(2)   WISPr-Location-ID = "isocc=,cc=,ac=,network=Coova,PiHomeServerAp"
+(2)   WISPr-Location-Name = "My_HotSpot"
+(2) # Executing section preacct from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(2)   preacct {
+(2)     [preprocess] = ok
+(2)     policy acct_unique {
+(2)       update request {
+(2)         &Tmp-String-9 := "ai:"
+(2)       } # update request = noop
+(2)       if (("%{hex:&Class}" =~ /^%{hex:&Tmp-String-9}/) && 	    ("%{string:&Class}" =~ /^ai:([0-9a-f]{32})/i)) {
+(2)       EXPAND %{hex:&Class}
+(2)          -->
+(2)       EXPAND ^%{hex:&Tmp-String-9}
+(2)          --> ^61693a
+(2)       if (("%{hex:&Class}" =~ /^%{hex:&Tmp-String-9}/) && 	    ("%{string:&Class}" =~ /^ai:([0-9a-f]{32})/i))  -> FALSE
+(2)       else {
+(2)         update request {
+(2)           EXPAND %{md5:%{User-Name},%{Acct-Session-ID},%{%{NAS-IPv6-Address}:-%{NAS-IP-Address}},%{NAS-Identifier},%{NAS-Port-ID},%{NAS-Port}}
+(2)              --> 5de9ab71f726736ef69daa0947d9b182
+(2)           &Acct-Unique-Session-Id := 5de9ab71f726736ef69daa0947d9b182
+(2)         } # update request = noop
+(2)       } # else = noop
+(2)     } # policy acct_unique = noop
+(2) suffix: Checking for suffix after "@"
+(2) suffix: No '@' in User-Name = "yoovraj", looking up realm NULL
+(2) suffix: No such realm "NULL"
+(2)     [suffix] = noop
+(2)     [files] = noop
+(2)   } # preacct = ok
+(2) # Executing section accounting from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(2)   accounting {
+(2) detail: EXPAND /usr/local/freeradius/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/detail-%Y%m%d
+(2) detail:    --> /usr/local/freeradius/var/log/radius/radacct/192.168.2.9/detail-20180310
+(2) detail: /usr/local/freeradius/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/detail-%Y%m%d expands to /usr/local/freeradius/var/log/radius/radacct/192.168.2.9/detail-20180310
+(2) detail: EXPAND %t
+(2) detail:    --> Sat Mar 10 11:20:57 2018
+(2)     [detail] = ok
+(2)     [unix] = ok
+(2) sql: EXPAND %{tolower:type.%{Acct-Status-Type}.query}
+(2) sql:    --> type.start.query
+(2) sql: Using query template 'query'
+rlm_sql (sql): Reserved connection (8)
+(2) sql: EXPAND %{User-Name}
+(2) sql:    --> yoovraj
+(2) sql: SQL-User-Name set to 'yoovraj'
+(2) sql: EXPAND INSERT INTO radacct (acctsessionid,		acctuniqueid,		username, realm,			nasipaddress,		nasportid, nasporttype,		acctstarttime,		acctupdatetime, acctstoptime,		acctsessiontime, 	acctauthentic, connectinfo_start,	connectinfo_stop, 	acctinputoctets, acctoutputoctets,	calledstationid, 	callingstationid, acctterminatecause,	servicetype,		framedprotocol, framedipaddress) VALUES ('%{Acct-Session-Id}', '%{Acct-Unique-Session-Id}', '%{SQL-User-Name}', '%{Realm}', '%{NAS-IP-Address}', '%{%{NAS-Port-ID}:-%{NAS-Port}}', '%{NAS-Port-Type}', FROM_UNIXTIME(%{integer:Event-Timestamp}), FROM_UNIXTIME(%{integer:Event-Timestamp}), NULL, '0', '%{Acct-Authentic}', '%{Connect-Info}', '', '0', '0', '%{Called-Station-Id}', '%{Calling-Station-Id}', '', '%{Service-Type}', '%{Framed-Protocol}', '%{Framed-IP-Address}')
+(2) sql:    --> INSERT INTO radacct (acctsessionid,		acctuniqueid,		username, realm,			nasipaddress,		nasportid, nasporttype,		acctstarttime,		acctupdatetime, acctstoptime,		acctsessiontime, 	acctauthentic, connectinfo_start,	connectinfo_stop, 	acctinputoctets, acctoutputoctets,	calledstationid, 	callingstationid, acctterminatecause,	servicetype,		framedprotocol, framedipaddress) VALUES ('152064812100000002', '5de9ab71f726736ef69daa0947d9b182', 'yoovraj', '', '192.168.10.1', '00000002', 'Wireless-802.11', FROM_UNIXTIME(1520648457), FROM_UNIXTIME(1520648457), NULL, '0', '', '', '', '0', '0', 'B8-27-EB-41-67-CB', '58-7F-57-B8-C2-3B', '', '', '', '192.168.10.2')
+(2) sql: Executing query: INSERT INTO radacct (acctsessionid,		acctuniqueid,		username, realm,			nasipaddress,		nasportid, nasporttype,		acctstarttime,		acctupdatetime, acctstoptime,		acctsessiontime, 	acctauthentic, connectinfo_start,	connectinfo_stop, 	acctinputoctets, acctoutputoctets,	calledstationid, 	callingstationid, acctterminatecause,	servicetype,		framedprotocol, framedipaddress) VALUES ('152064812100000002', '5de9ab71f726736ef69daa0947d9b182', 'yoovraj', '', '192.168.10.1', '00000002', 'Wireless-802.11', FROM_UNIXTIME(1520648457), FROM_UNIXTIME(1520648457), NULL, '0', '', '', '', '0', '0', 'B8-27-EB-41-67-CB', '58-7F-57-B8-C2-3B', '', '', '', '192.168.10.2')
+(2) sql: SQL query returned: success
+(2) sql: 1 record(s) updated
+rlm_sql (sql): Released connection (8)
+(2)     [sql] = ok
+(2)     [exec] = noop
+(2) attr_filter.accounting_response: EXPAND %{User-Name}
+(2) attr_filter.accounting_response:    --> yoovraj
+(2) attr_filter.accounting_response: Matched entry DEFAULT at line 12
+(2)     [attr_filter.accounting_response] = updated
+(2)   } # accounting = updated
+(2) Sent Accounting-Response Id 1 from 192.168.2.1:1813 to 192.168.2.9:37234 length 0
+(2) Finished request
+(2) Cleaning up request packet ID 1 with timestamp +465
+Waking up in 4.9 seconds.
+(1) Cleaning up request packet ID 28 with timestamp +465
+Ready to process requests
+
+
+
+
+(3) Received Accounting-Request Id 2 from 192.168.2.9:37234 to 192.168.2.1:1813 length 274
+(3)   ChilliSpot-Version = "1.4"
+(3)   Attr-26.14559.10 = 0x00000002
+(3)   Event-Timestamp = "Mar 10 2018 11:25:59 JST"
+(3)   User-Name = "yoovraj"
+(3)   Acct-Input-Octets = 6518038
+(3)   Acct-Output-Octets = 433233
+(3)   Acct-Input-Gigawords = 0
+(3)   Acct-Output-Gigawords = 0
+(3)   Acct-Input-Packets = 5712
+(3)   Acct-Output-Packets = 4664
+(3)   Acct-Session-Time = 302
+(3)   Acct-Status-Type = Interim-Update
+(3)   Acct-Session-Id = "152064812100000002"
+(3)   Framed-IP-Address = 192.168.10.2
+(3)   NAS-Port-Type = Wireless-802.11
+(3)   NAS-Port = 2
+(3)   NAS-Port-Id = "00000002"
+(3)   Calling-Station-Id = "58-7F-57-B8-C2-3B"
+(3)   Called-Station-Id = "B8-27-EB-41-67-CB"
+(3)   NAS-IP-Address = 192.168.10.1
+(3)   NAS-Identifier = "nas01"
+(3)   WISPr-Location-ID = "isocc=,cc=,ac=,network=Coova,PiHomeServerAp"
+(3)   WISPr-Location-Name = "My_HotSpot"
+(3) # Executing section preacct from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(3)   preacct {
+(3)     [preprocess] = ok
+(3)     policy acct_unique {
+(3)       update request {
+(3)         &Tmp-String-9 := "ai:"
+(3)       } # update request = noop
+(3)       if (("%{hex:&Class}" =~ /^%{hex:&Tmp-String-9}/) && 	    ("%{string:&Class}" =~ /^ai:([0-9a-f]{32})/i)) {
+(3)       EXPAND %{hex:&Class}
+(3)          -->
+(3)       EXPAND ^%{hex:&Tmp-String-9}
+(3)          --> ^61693a
+(3)       if (("%{hex:&Class}" =~ /^%{hex:&Tmp-String-9}/) && 	    ("%{string:&Class}" =~ /^ai:([0-9a-f]{32})/i))  -> FALSE
+(3)       else {
+(3)         update request {
+(3)           EXPAND %{md5:%{User-Name},%{Acct-Session-ID},%{%{NAS-IPv6-Address}:-%{NAS-IP-Address}},%{NAS-Identifier},%{NAS-Port-ID},%{NAS-Port}}
+(3)              --> 5de9ab71f726736ef69daa0947d9b182
+(3)           &Acct-Unique-Session-Id := 5de9ab71f726736ef69daa0947d9b182
+(3)         } # update request = noop
+(3)       } # else = noop
+(3)     } # policy acct_unique = noop
+(3) suffix: Checking for suffix after "@"
+(3) suffix: No '@' in User-Name = "yoovraj", looking up realm NULL
+(3) suffix: No such realm "NULL"
+(3)     [suffix] = noop
+(3)     [files] = noop
+(3)   } # preacct = ok
+(3) # Executing section accounting from file /usr/local/freeradius/etc/raddb/sites-enabled/default
+(3)   accounting {
+(3) detail: EXPAND /usr/local/freeradius/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/detail-%Y%m%d
+(3) detail:    --> /usr/local/freeradius/var/log/radius/radacct/192.168.2.9/detail-20180310
+(3) detail: /usr/local/freeradius/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/detail-%Y%m%d expands to /usr/local/freeradius/var/log/radius/radacct/192.168.2.9/detail-20180310
+(3) detail: EXPAND %t
+(3) detail:    --> Sat Mar 10 11:25:59 2018
+(3)     [detail] = ok
+(3)     [unix] = noop
+(3) sql: EXPAND %{tolower:type.%{Acct-Status-Type}.query}
+(3) sql:    --> type.interim-update.query
+(3) sql: Using query template 'query'
+rlm_sql (sql): Closing connection (7): Hit idle_timeout, was idle for 302 seconds
+rlm_sql (sql): You probably need to lower "min"
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): Closing connection (8): Hit idle_timeout, was idle for 302 seconds
+rlm_sql (sql): You probably need to lower "min"
+rlm_sql_mysql: Socket destructor called, closing socket
+rlm_sql (sql): 0 of 0 connections in use.  You  may need to increase "spare"
+rlm_sql (sql): Opening additional connection (9), 1 of 32 pending slots used
+rlm_sql_mysql: Starting connect to MySQL server
+rlm_sql_mysql: Connected to database 'radius' on Localhost via UNIX socket, server version 5.7.19, protocol version 10
+rlm_sql (sql): Reserved connection (9)
+(3) sql: EXPAND %{User-Name}
+(3) sql:    --> yoovraj
+(3) sql: SQL-User-Name set to 'yoovraj'
+(3) sql: EXPAND UPDATE radacct SET acctupdatetime  = (@acctupdatetime_old:=acctupdatetime), acctupdatetime  = FROM_UNIXTIME(%{integer:Event-Timestamp}), acctinterval    = %{integer:Event-Timestamp} - UNIX_TIMESTAMP(@acctupdatetime_old), framedipaddress = '%{Framed-IP-Address}', acctsessiontime = %{%{Acct-Session-Time}:-NULL}, acctinputoctets = '%{%{Acct-Input-Gigawords}:-0}' << 32 | '%{%{Acct-Input-Octets}:-0}', acctoutputoctets = '%{%{Acct-Output-Gigawords}:-0}' << 32 | '%{%{Acct-Output-Octets}:-0}' WHERE AcctUniqueId = '%{Acct-Unique-Session-Id}'
+(3) sql:    --> UPDATE radacct SET acctupdatetime  = (@acctupdatetime_old:=acctupdatetime), acctupdatetime  = FROM_UNIXTIME(1520648759), acctinterval    = 1520648759 - UNIX_TIMESTAMP(@acctupdatetime_old), framedipaddress = '192.168.10.2', acctsessiontime = 302, acctinputoctets = '0' << 32 | '6518038', acctoutputoctets = '0' << 32 | '433233' WHERE AcctUniqueId = '5de9ab71f726736ef69daa0947d9b182'
+(3) sql: Executing query: UPDATE radacct SET acctupdatetime  = (@acctupdatetime_old:=acctupdatetime), acctupdatetime  = FROM_UNIXTIME(1520648759), acctinterval    = 1520648759 - UNIX_TIMESTAMP(@acctupdatetime_old), framedipaddress = '192.168.10.2', acctsessiontime = 302, acctinputoctets = '0' << 32 | '6518038', acctoutputoctets = '0' << 32 | '433233' WHERE AcctUniqueId = '5de9ab71f726736ef69daa0947d9b182'
+rlm_sql_mysql: Rows matched: 1  Changed: 1  Warnings: 0
+(3) sql: SQL query returned: success
+(3) sql: 1 record(s) updated
+rlm_sql (sql): Released connection (9)
+Need 2 more connections to reach min connections (3)
+rlm_sql (sql): Opening additional connection (10), 1 of 31 pending slots used
+rlm_sql_mysql: Starting connect to MySQL server
+rlm_sql_mysql: Connected to database 'radius' on Localhost via UNIX socket, server version 5.7.19, protocol version 10
+(3)     [sql] = ok
+(3)     [exec] = noop
+(3) attr_filter.accounting_response: EXPAND %{User-Name}
+(3) attr_filter.accounting_response:    --> yoovraj
+(3) attr_filter.accounting_response: Matched entry DEFAULT at line 12
+(3)     [attr_filter.accounting_response] = updated
+(3)   } # accounting = updated
+(3) Sent Accounting-Response Id 2 from 192.168.2.1:1813 to 192.168.2.9:37234 length 0
+(3) Finished request
+(3) Cleaning up request packet ID 2 with timestamp +767
+Ready to process requests

@@ -98,3 +98,12 @@ vi /etc/init.d/chilli
 
 # copy defaults to chilli
 cp etc/chilli/defaults etc/chilli/config
+
+# for kilproc function
+vi ./etc/init.d/chilli
+----
+. /lib/lsb/init-functions
+----
+
+### Radius attributes
+https://ignitenet.uservoice.com/knowledgebase/articles/933507-what-are-the-supported-radius-attributes-in-coovac
