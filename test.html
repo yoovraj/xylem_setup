@@ -1,0 +1,31 @@
+<html>
+<head> test page </head>
+<body>
+<script src="http://192.168.10.1:3990/www/ChilliLibrary.js"></script>
+<script>
+// The included script creates a global chilliController object
+
+// If you use non standard configuration, define your configuration
+chilliController.host = "192.168.10.1";  // Default is 192.168.182.1
+chilliController.port  = 3990     ; //  Default is 3990
+chilliController.interval = 30    ; // Default is 30 seconds
+
+// then define event handler functions
+chilliController.onError  = handleErrors;
+chilliController.onUpdate = updateUI ;
+
+// when the reply is ready, this handler function is called
+function updateUI( cmd ) {
+  alert ( 'You called the method' + cmd +
+    '\n Your current state is =' + chilliController.clientState ) ;
+}
+
+// If an error occurs, this handler will be called instead
+function handleErrors ( code ) {
+  alert ( 'The last contact with the Controller failed. Error code =' + code );
+}
+//  finally, get current state
+chilliController.refresh();
+</script>
+</body>
+</html>

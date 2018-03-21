@@ -1,0 +1,25 @@
+<NSHTTPCookie
+	version:0
+	name:PORTAL_SESSIONID
+	value:18c45aacf511
+	expiresDate:'(null)'
+	created:'2018-03-17 10:59:29 +0000'
+	sessionOnly:TRUE
+	domain:192.168.10.1
+	partition:none
+	path:/www
+	isSecure:FALSE
+ path:"/www" isSecure:FALSE>
+
+<NSHTTPCookie
+	version:0
+	name:COOVA_USERURL
+	value:http://coova.github.io/
+	expiresDate:'(null)'
+	created:'2018-03-17 10:59:29 +0000'
+	sessionOnly:TRUE
+	domain:192.168.10.1
+	partition:none
+	path:/www
+	isSecure:FALSE
+ path:"/www" isSecure:FALSE>

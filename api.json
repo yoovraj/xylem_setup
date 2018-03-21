@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "clientState": 0,
+  "nasid": "nas01",
+  "challenge": "7ac742e77309cc0d656a95f7fe32b05f",
+  "location": {
+    "name": "My HotSpot"
+  },
+  "redir": {
+    "originalURL": "http:///",
+    "redirectionURL": "",
+    "logoutURL": "http://192.168.10.1:3990/logoff",
+    "ipAddress": "192.168.10.4",
+    "macAddress": "80-E6-50-12-9F-50"
+  }
+}
+
+{
+  "version": "1.0",
+  "clientState": 1,
+  "nasid": "nas01",
+  "redir": {
+    "originalURL": "http://192.168.10.1:3990/json/",
+    "redirectionURL": "",
+    "logoutURL": "http://192.168.10.1:3990/logoff",
+    "ipAddress": "192.168.10.4",
+    "macAddress": "80-E6-50-12-9F-50"
+  },
+  "session": {
+    "sessionId": "152096217400000002",
+    "userName": "yoovraj",
+    "startTime": 1520962576,
+    "sessionTimeout": 360,
+    "terminateTime": 0,
+    "idleTimeout": 0
+  },
+  "accounting": {
+    "sessionTime": 3,
+    "idleTime": 0,
+    "inputOctets": 32819,
+    "outputOctets": 23259,
+    "inputGigawords": 0,
+    "outputGigawords": 0,
+    "viewPoint": "client"
+  }
+}

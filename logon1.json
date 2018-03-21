@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "clientState": 0,
+  "nasid": "nas01",
+  "challenge": "13c5683b15a7c4c1c7a260f62782d1ff",
+  "redir": {
+    "originalURL": "http://coova.github.io/",
+    "redirectionURL": "",
+    "logoutURL": "http://192.168.10.1:3990/logoff",
+    "ipAddress": "192.168.10.3",
+    "macAddress": "58-7F-57-B8-C2-3B"
+  }
+}

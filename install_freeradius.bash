@@ -80,9 +80,13 @@ aptitude search libkqueue
 sudo apt-get install libkqueue-dev libkqueue0
 
 
-aptitude install mysql-server
-aptitude search libmysqlclient
+sudo aptitude install mysql-server
+sudo aptitude search libmysqlclient
 sudo apt-get install libmysqlclient-dev
 
 
 ./configure --prefix=/usr/local/radius --with-openssl=no
+
+
+JSON interface
+http://192.168.10.1:3990/json/status

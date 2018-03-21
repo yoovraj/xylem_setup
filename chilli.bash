@@ -37,16 +37,18 @@ v1,4 :
 --enable-ipwhitelist --enable-redirdnsreq --enable-miniconfig \
 --enable-libjson --enable-layer3 --enable-proxyvsa --enable-miniportal \
 --enable-chilliscript --enable-eapol --enable-uamdomainfile \
---enable-modules --enable-multiroute
-
+--enable-modules --enable-multiroute --enable-json
 --enable-dnslog
+
+
+
 
 
 
 # put this to ignore error
 export CFLAGS="-Wno-error"
 # minimal installation
-./configure --prefix=/usr/local/chilli --enable-miniportal
+./configure --prefix=/usr/local/chilli --enable-miniportal --enable-libjson --enable-json
 
 
 
@@ -107,3 +109,7 @@ vi ./etc/init.d/chilli
 
 ### Radius attributes
 https://ignitenet.uservoice.com/knowledgebase/articles/933507-what-are-the-supported-radius-attributes-in-coovac
+
+
+
+/sbin/start-stop-daemon --stop --exec  /usr/local/chilli/sbin/chilli
