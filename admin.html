@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="adminApp">
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-left:auto;
+  margin-right:auto;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+div.canvas_display {
+  width: 600px;
+  height: 600px;
+  margin-left:auto;
+  margin-right:auto;
+}
+</style>
+  <head>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="admin.js"></script>
+  </head>
+  <body ng-controller="AdminController">
+    <table>
+      <tr><td>UserName</td><td>Total used (XNT)</td></tr>
+      <tr ng-repeat="device in devices">
+        <td>{{device.user_name}}</td>
+        <td>{{device.data_cost}} XNT</td>
+      </tr>
+    </table>
+    <br>
+    <center>Data Usage Statistics<center>
+    <div class="canvas_display">
+    <canvas id="base" class="chart-bar"
+    chart-data="data" chart-labels="labels" chart-colors="colors"
+    chart-dataset-override="datasetOverride"></canvas>
+  </div>
+  </body>
+</html>
